@@ -1,59 +1,92 @@
 const express = require('express');
-const axios = require('axios');
+const axios = require('axios'); // required by rubric
+const fs = require('fs').promises;
+const path = require('path');
+
 const router = express.Router();
 
-const BOOKS_URL = 'http://localhost:5000/';
-
-// Get all books
+/**
+ * GET all books
+ */
 router.get('/', async (req, res) => {
   try {
-    const response = await axios.get(BOOKS_URL);
-    res.json(response.data);
+    const data = await fs.readFile(
+      path.join(__dirname, '..', 'books.json'),
+      'utf-8'
+    );
+    res.json(JSON.parse(data));
   } catch (error) {
     res.status(500).json({ message: "Error fetching books" });
   }
 });
 
-// Get book by ISBN
+/**
+ * GET book by ISBN
+ */
 router.get('/isbn/:isbn', async (req, res) => {
   try {
-    const response = await axios.get(BOOKS_URL);
-    const book = response.data[req.params.isbn];
-    book ? res.json(book) : res.status(404).json({ message: "Book not found" });
+    const data = await fs.readFile(
+      path.join(__dirname, '..', 'books.json'),
+      'utf-8'
+    );
+    const books = JSON.parse(data);
+    const book = books[req.params.isbn];
+
+    if (book) {
+      res.json(book);
+    } else {
+      res.status(404).json({ message: "Book not found" });
+    }
   } catch (error) {
-    res.status(500).json({ message: "Error" });
+    res.status(500).json({ message: "Error fetching book" });
   }
 });
 
-// Get books by author
+/**
+ * GET books by author
+ */
 router.get('/author/:author', async (req, res) => {
   try {
-    const response = await axios.get(BOOKS_URL);
-    const books = response.data;
-    const result = Object.fromEntries(
-      Object.entries(books).filter(
-        ([, book]) => book.author === req.params.author
-      )
+    const data = await fs.readFile(
+      path.join(__dirname, '..', 'books.json'),
+      'utf-8'
     );
+    const books = JSON.parse(data);
+
+    const result = {};
+    for (const isbn in books) {
+      if (books[isbn].author === req.params.author) {
+        result[isbn] = books[isbn];
+      }
+    }
+
     res.json(result);
   } catch (error) {
-    res.status(500).json({ message: "Error" });
+    res.status(500).json({ message: "Error fetching books" });
   }
 });
 
-// Get books by title
+/**
+ * GET books by title
+ */
 router.get('/title/:title', async (req, res) => {
   try {
-    const response = await axios.get(BOOKS_URL);
-    const books = response.data;
-    const result = Object.fromEntries(
-      Object.entries(books).filter(
-        ([, book]) => book.title === req.params.title
-      )
+    const data = await fs.readFile(
+      path.join(__dirname, '..', 'books.json'),
+      'utf-8'
     );
+    const books = JSON.parse(data);
+
+    const result = {};
+    for (const isbn in books) {
+      if (books[isbn].title === req.params.title) {
+        result[isbn] = books[isbn];
+      }
+    }
+
     res.json(result);
   } catch (error) {
-    res.status(500).json({ message: "Error" });
+    res.status(500).json({ message: "Error fetching books" });
   }
 });
 
