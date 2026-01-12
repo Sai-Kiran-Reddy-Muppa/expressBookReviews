@@ -1,17 +1,12 @@
 {
-  "9781593275846": {
-    "title": "Clean Code",
-    "author": "Robert C. Martin",
-    "reviews": {}
-  },
-  "9780132350884": {
-    "title": "Clean Architecture",
-    "author": "Robert C. Martin",
-    "reviews": {}
-  },
-  "9780201616224": {
-    "title": "The Pragmatic Programmer",
-    "author": "Andrew Hunt",
-    "reviews": {}
-  }
+  "9781593275846": { "title": "Clean Code", "author": "Robert C. Martin", "reviews": {} },
+  "9780132350884": { "title": "Clean Architecture", "author": "Robert C. Martin", "reviews": {} },
+  "9780201616224": { "title": "The Pragmatic Programmer", "author": "Andrew Hunt", "reviews": {} },
+  "9780131103627": { "title": "The C Programming Language", "author": "Dennis Ritchie", "reviews": {} },
+  "9780134494166": { "title": "Effective Java", "author": "Joshua Bloch", "reviews": {} },
+  "9780596007126": { "title": "Head First Design Patterns", "author": "Eric Freeman", "reviews": {} },
+  "9781491950296": { "title": "Designing Data-Intensive Applications", "author": "Martin Kleppmann", "reviews": {} },
+  "9780134685991": { "title": "Refactoring", "author": "Martin Fowler", "reviews": {} },
+  "9781617294136": { "title": "Spring in Action", "author": "Craig Walls", "reviews": {} },
+  "9781492078005": { "title": "Node.js Design Patterns", "author": "Mario Casciaro", "reviews": {} }
 }
